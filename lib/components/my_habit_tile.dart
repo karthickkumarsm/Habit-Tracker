@@ -134,7 +134,7 @@ class InfoHabit extends StatelessWidget {
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(8),
   ),
-  child: ListView.builder(
+  child:filteredTasks.isEmpty ? Center(child: const Text("No Record of finishing this habit :(",style: TextStyle(fontSize: 18,),)) :  ListView.builder(
     itemCount: filteredTasks.length,
     shrinkWrap: true,
     physics: const AlwaysScrollableScrollPhysics(), // Ensure list is always scrollable
@@ -147,7 +147,7 @@ class InfoHabit extends StatelessWidget {
           color: Theme.of(context).colorScheme.secondary,
         ),
         child: ListTile(
-          title:completedTasks.isEmpty ? const Text("No Record of finishing this habit",style: TextStyle(fontSize: 18),) : Text('Habit: ${task['name']}\nCompleted Date: ${task['date'].toString().split(' ')[0]}',style:const TextStyle(fontSize: 18),),
+          title:Text('Habit: ${task['name']}\nCompleted Date: ${task['date'].toString().split(' ')[0]}',style:const TextStyle(fontSize: 18),),
           contentPadding: const EdgeInsets.all(12),
         ),
       );

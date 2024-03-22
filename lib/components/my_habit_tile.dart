@@ -130,7 +130,7 @@ class InfoHabit extends StatelessWidget {
         title: const Text("Logs"),
       ),
       body:  Container(
-  margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10), // Adjust margin as needed
+  margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10), // Adjust margin as needed
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(8),
   ),
@@ -141,13 +141,13 @@ class InfoHabit extends StatelessWidget {
     itemBuilder: (context, index) {
       final task = filteredTasks[index];
       return Container(
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5), // Adjust margin as needed
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5), // Adjust margin as needed
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),// Background color of each list item
           color: Theme.of(context).colorScheme.secondary,
         ),
         child: ListTile(
-          title: Text('Habit: ${task['name']}\nCompleted Date: ${task['date'].toString().split(' ')[0]}',style: TextStyle(fontSize: 18),),
+          title:completedTasks.isEmpty ? const Text("No Record of finishing this habit",style: TextStyle(fontSize: 18),) : Text('Habit: ${task['name']}\nCompleted Date: ${task['date'].toString().split(' ')[0]}',style:const TextStyle(fontSize: 18),),
           contentPadding: const EdgeInsets.all(12),
         ),
       );

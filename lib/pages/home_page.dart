@@ -157,7 +157,6 @@ void deleteHabitBox(Habit habit){
 }
 
 
-
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -234,11 +233,16 @@ void deleteHabitBox(Habit habit){
       bool isCompletedToday = isHabitsCompletedToday(habit.completedDays);
 
       //return habit tile UI
-      return MyHabitTile(text: habit.name, isCompleted: isCompletedToday,
-      onChanged: (value)=> checkHabitOnOff(value,habit),
-      editHabit: (context) => editHabitBox(habit) ,
-      deleteHabit: (context)=>deleteHabitBox(habit),
-      );
+      return MyHabitTile(
+        habit: habit,
+  text: habit.name,
+  isCompleted: isCompletedToday,
+  onChanged: (value) => checkHabitOnOff(value, habit),
+  editHabit: (context) => editHabitBox(habit),
+  deleteHabit: (context) => deleteHabitBox(habit),
+  completedTasks: [], // Pass the completedTasks list here
+);
+
     }));
 
   }

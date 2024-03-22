@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'pages/home_page.dart';
 import 'notification_controller.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //init the database
@@ -37,15 +38,16 @@ void main() async {
       id: 1,
       channelKey: 'HabitTrackerApp',
       title: '!!!--REMAINDER--!!!',
-      body: 'Have you recorded your record track today?',
+      body: 'Have you recorded your completed goal today?',
       wakeUpScreen: true,
       category: NotificationCategory.Message,
   ),
   schedule: NotificationInterval(
       interval: 21600,
-      repeats: true,
       allowWhileIdle: true,
+      repeats: true,
       timeZone: localTimeZone,
+      preciseAlarm: true,
   )
   );
 

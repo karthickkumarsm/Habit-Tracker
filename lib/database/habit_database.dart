@@ -64,6 +64,17 @@ class HabitDatabase extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<List<Habit>> getCompletedTasksForHabit(int habitId) async {
+  final habit = await isar.habits.get(habitId);
+  if (habit != null) {
+    return [habit]; // Return the habit itself as the completed task
+  } else {
+    return []; // Return an empty list if habit is not found
+  }
+}
+
+
+
   //update - check habits on and off
   Future<void> updateHabitCompletion(int id,bool isCompleted)async{
     //find the specific habit
@@ -105,6 +116,9 @@ class HabitDatabase extends ChangeNotifier {
     //re-read from db
     readHabits();
   }
+
+
+
  
   //UPDATE -edit habit name
   Future<void> updateHabitName(int id,String newName) async{

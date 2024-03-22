@@ -1,6 +1,6 @@
 
 # Project Title
-HabitHub-central hub for managing and cultivating habits
+HabitTracker-central hub for managing and cultivating habits
 
 
 
@@ -11,6 +11,8 @@ HabitHub-central hub for managing and cultivating habits
 * Has Heatmaps and calender to track your streaks
 * Allows you to delete and edit your habits from the existing list
 * Allows you to create a new habit cardlist
+
+* New Feature Added : Notification Feature added just to remind you to track your habit record everyday
 
 
 ## 🚀 About Me

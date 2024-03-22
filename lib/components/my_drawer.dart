@@ -18,57 +18,104 @@ class MyDrawer extends StatelessWidget {
               "HabitTacker",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-             const Text(
+            const Text(
               "An AppVista Product",
               style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
             ),
             const Padding(padding: EdgeInsets.all(20)),
-            ElevatedButton(
-                onPressed: () {
-                   Navigator.push(
-      context,
-      MaterialPageRoute(
-         builder: (context) => const Settings(),
-      ),
-    );
-                  },  
-                child: Text(
-                  "Settings",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).colorScheme.inversePrimary,
-                      ),
-                )),
-                
-            const Padding(padding: EdgeInsets.all(10)),
-                ElevatedButton(
-                onPressed: () {
-                   Navigator.push(
+            SizedBox(
+              width: 175,
+              height: 50,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
                       context,
-                       MaterialPageRoute(
-                          builder: (context) => const About(),
-                           ),
-                        );
-                  },  
-                child: Text(
-                  "About",
-                  style: TextStyle(
+                      MaterialPageRoute(
+                        builder: (context) => const Settings(),
+                      ),
+                    );
+                  },
+                   style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    )
+                  ),
+                  child: Text(
+                    "Settings",
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
+                  ),
+                  ),
+            ),
+            const Padding(padding: EdgeInsets.all(10)),
+            SizedBox(
+              width: 175,
+              height: 50,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const About(),
                       ),
-                )),
-              Padding(padding: EdgeInsets.only(top: 100)),
-              Text("copyright ©️ 2024",style: TextStyle(fontSize: 10,fontWeight:FontWeight.bold ),)
-
-            ],
+                    );
+                  },
+                   style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    )
+                  ),
+                   child: Text(
+                    "About",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
+                  ),
+                  ),
+            ),
+            const Padding(padding: EdgeInsets.all(10)),
+            SizedBox(
+              width: 175,
+              height: 50,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Info(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    )
+                  ),  
+                  child: Text(
+                    "How to use",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
+                  ),
+                  ),
+            ),
+            const Padding(padding: EdgeInsets.only(top: 100)),
+            const Text(
+              "copyright ©️ 2024",
+              style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+            )
+          ],
         ),
       ),
     );
   }
-  
- 
 }
 
 class Settings extends StatelessWidget {
@@ -76,29 +123,32 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      
-    backgroundColor: Theme.of(context).colorScheme.background,
-     appBar: AppBar(
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-      title: const Text("Settings"),
-     ),
-     body: Container(
-      margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 25), 
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text("Dark/Light Mode",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-          CupertinoSwitch(
-            value: Provider.of<ThemeProvider>(context).isDarkMode,
-            onChanged: (value){
-              Provider.of<ThemeProvider>(context,listen: false).toggleTheme();
-              }
-          )
-        ],
+        title: const Text("Settings"),
       ),
-     ),
+      body: Container(
+        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              "Dark/Light Mode",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            CupertinoSwitch(
+                value: Provider.of<ThemeProvider>(context).isDarkMode,
+                onChanged: (value) {
+                  Provider.of<ThemeProvider>(context, listen: false)
+                      .toggleTheme();
+                })
+          ],
+        ),
+      ),
     );
   }
 }
@@ -109,17 +159,44 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Theme.of(context).colorScheme.background,
-     appBar: AppBar(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-      title: const Text("About"),
-     ),
-     body: Container(
-      margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20), 
-       child:const Text("Version:1.3.0\n\nContact Us:appvista2024@gmail.com\n",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-     ),
+        title: const Text("About"),
+      ),
+      body: Container(
+        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: const Text(
+          "Version : 1.3.0\n\nContact us : appvista2024@gmail.com\n\nCreated By : AppVista",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}
+
+class Info extends StatelessWidget {
+  const Info({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        elevation: 0,
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text("How to use"),
+      ),
+      body: Container(
+        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: const Text(
+          "1.Enter your Habits by clicking '+' icon button\n\n2.Swipe right side to see the options\n\n3.Click on 'calander' icon to view your completion log\n\n4.Click on 'Edit' icon to edit the habit\n\n5.click on 'Delete' icon to delete the habit\n\n6.Click on Hamburger icon to see menu\n\n7.Click on settings to access settings option",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+      ),
     );
   }
 }

@@ -33,7 +33,7 @@ class MyHabitTile extends StatelessWidget {
           children: [
             //info
   SlidableAction(
-  onPressed: (async) async {
+  onPressed: (context) async {
    final habitDatabase = Provider.of<HabitDatabase>(context, listen: false);
    final completedTasks = await habitDatabase.getCompletedTasksForHabit(habit.id);
  Navigator.push(

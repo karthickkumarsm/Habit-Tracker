@@ -37,7 +37,7 @@ void main() async {
   content: NotificationContent(
       id: 1,
       channelKey: 'HabitTrackerApp',
-      title: '!!!--REMAINDER--!!!',
+      title: '!!!--REMINDER--!!!',
       body: 'Have you recorded your completed goal today?',
       wakeUpScreen: true,
       category: NotificationCategory.Message,

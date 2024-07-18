@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/components/my_drawer.dart';
 import 'package:habit_tracker/components/my_habit_tile.dart';
@@ -157,6 +158,40 @@ void deleteHabitBox(Habit habit){
 }
 
 
+Future<void> setReminder(context) async {
+  TimeOfDay? selectedTime = await showTimePicker(
+    context: context,
+    initialTime: TimeOfDay.now(),
+  );
+
+  if (selectedTime != null) {
+    final now = DateTime.now();
+    final selectedDateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      selectedTime.hour,
+      selectedTime.minute,
+    );
+
+    // Schedule the notification
+    AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 1,
+        channelKey: 'HabitTrackerApp',
+        title: 'Reminder',
+        body: 'This is a reminder to complete your scheduled habit!',
+        wakeUpScreen: true,
+        notificationLayout: NotificationLayout.Default,
+      ),
+      schedule: NotificationCalendar.fromDate(
+        date: selectedDateTime,
+        repeats: false, // Set to true if you want the reminder to repeat daily
+      ),
+    );
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -240,6 +275,7 @@ void deleteHabitBox(Habit habit){
   onChanged: (value) => checkHabitOnOff(value, habit),
   editHabit: (context) => editHabitBox(habit),
   deleteHabit: (context) => deleteHabitBox(habit),
+  setReminder: (context) {setReminder(context);},
   completedTasks: [], // Pass the completedTasks list here
 );
 

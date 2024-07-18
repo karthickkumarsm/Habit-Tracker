@@ -169,8 +169,8 @@ class About extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: const Text(
-          "Version : 1.3.0\n\nContact us : appvista2024@gmail.com\n\nCreated By : AppVista",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          "Version : 1.4.0\n\nContact us : appvista2024@gmail.com\n\nCompany : AppVista\n\nDeveloper : Karthick Kumar SM",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -193,7 +193,7 @@ class Info extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: const Text(
-          "1.Enter your Habits by clicking '+' icon button\n\n2.Swipe right side to see the options\n\n3.Click on 'calander' icon to view your completion log\n\n4.Click on 'Edit' icon to edit the habit\n\n5.click on 'Delete' icon to delete the habit\n\n6.Click on Hamburger icon to see menu\n\n7.Click on settings to access settings option",
+          "1.Enter your Habits by clicking '+' icon button\n\n2.Swipe the habit to right side for more actions\n\n3.Click on 'calander' icon to view your completion log\n\n4.Click on 'Edit' icon to edit the habit\n\n5.click on 'Delete' icon to delete the habit\n\n6.Click on 'Reminder' icon to set timer to get reminder notification about the habit to be complete\n\n7.Click on 'Hamburger' icon to see menu\n\n8.Click on 'Settings' to access settings option",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),

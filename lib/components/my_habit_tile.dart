@@ -3,24 +3,28 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:habit_tracker/database/habit_database.dart';
 import 'package:habit_tracker/models/habit.dart';
 import 'package:provider/provider.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 
 class MyHabitTile extends StatelessWidget {
-   final Habit habit;
+  final Habit habit;
   final String text;
   final bool isCompleted;
   final void Function(bool?)? onChanged;
   final void Function(BuildContext)? editHabit;
   final void Function(BuildContext)? deleteHabit;
+  final void Function(BuildContext)? setReminder;
   final List<Habit> completedTasks;
-  const MyHabitTile(
-      {super.key,
-      required this.habit, 
-      required this.text,
-      required this.isCompleted,
-      required this.onChanged,
-      required this.editHabit,
-      required this.deleteHabit,
-      required this.completedTasks, // Add this line
+
+  const MyHabitTile({
+    super.key,
+    required this.habit,
+    required this.text,
+    required this.isCompleted,
+    required this.onChanged,
+    required this.editHabit,
+    required this.deleteHabit,
+    required this.setReminder,
+    required this.completedTasks,
   });
 
   @override
@@ -31,46 +35,56 @@ class MyHabitTile extends StatelessWidget {
         endActionPane: ActionPane(
           motion: const StretchMotion(),
           children: [
-            //info
-  SlidableAction(
-  onPressed: (context) async {
-   final habitDatabase = Provider.of<HabitDatabase>(context, listen: false);
-   final completedTasks = await habitDatabase.getCompletedTasksForHabit(habit.id);
- Navigator.push(
-      context,
-      MaterialPageRoute(
-         builder: (context) => InfoHabit(
+            // Info
+            SlidableAction(
+              onPressed: (context) async {
+                final habitDatabase = Provider.of<HabitDatabase>(context, listen: false);
+                final completedTasks = await habitDatabase.getCompletedTasksForHabit(habit.id);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => InfoHabit(
                       habitName: habit.name,
                       completedTasks: completedTasks, // Pass completedTasks here
                     ),
-      ),
-    );
-  },
-  backgroundColor: Colors.blue.shade800,
-  icon: Icons.calendar_month,
-  borderRadius: BorderRadius.circular(8),
-),
-            //edit
+                  ),
+                );
+              },
+              backgroundColor: Colors.blue.shade800,
+              icon: Icons.calendar_month,
+              borderRadius: BorderRadius.circular(8),
+              padding: EdgeInsets.only(right: 5),
+            ),
+            // Edit
             SlidableAction(
               onPressed: editHabit,
               backgroundColor: Colors.grey.shade800,
-              icon: Icons.edit,
+              icon:Icons.edit,
               borderRadius: BorderRadius.circular(8),
+              padding: EdgeInsets.only(right: 5),
             ),
-
-            //delete
+            // Delete
             SlidableAction(
               onPressed: deleteHabit,
               backgroundColor: Colors.red,
               icon: Icons.delete,
               borderRadius: BorderRadius.circular(8),
+              padding: EdgeInsets.only(right: 5),
+            ),
+            // Reminder
+            SlidableAction(
+              onPressed: setReminder,
+              backgroundColor: Colors.purple,
+              icon: Icons.alarm,
+              borderRadius: BorderRadius.circular(8),
+              padding: EdgeInsets.only(right: 5),
             ),
           ],
         ),
         child: GestureDetector(
           onTap: () {
             if (onChanged != null) {
-              //toggle completion status
+              // Toggle completion status
               onChanged!(!isCompleted);
             }
           },
@@ -83,16 +97,19 @@ class MyHabitTile extends StatelessWidget {
             ),
             padding: const EdgeInsets.all(12),
             child: ListTile(
-              title: Text(text,
-                  style: TextStyle(
-                      color: isCompleted
-                          ? Colors.white
-                          : Theme.of(context).colorScheme.inversePrimary)),
+              title: Text(
+                text,
+                style: TextStyle(
+                  color: isCompleted
+                      ? Colors.white
+                      : Theme.of(context).colorScheme.inversePrimary,
+                ),
+              ),
               leading: Checkbox(
                 activeColor: Colors.green,
                 side: isCompleted
-                    ? (const BorderSide(color: Colors.white))
-                    : (const BorderSide(color: Colors.black)),
+                    ? const BorderSide(color: Colors.white)
+                    : const BorderSide(color: Colors.black),
                 value: isCompleted,
                 onChanged: onChanged,
               ),
@@ -129,32 +146,40 @@ class InfoHabit extends StatelessWidget {
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Logs"),
       ),
-      body:  Container(
-  margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10), // Adjust margin as needed
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(8),
-  ),
-  child:filteredTasks.isEmpty ? Center(child: const Text("No Record of finishing this habit :(",style: TextStyle(fontSize: 18,),)) :  ListView.builder(
-    itemCount: filteredTasks.length,
-    shrinkWrap: true,
-    physics: const AlwaysScrollableScrollPhysics(), // Ensure list is always scrollable
-    itemBuilder: (context, index) {
-      final task = filteredTasks[index];
-      return Container(
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5), // Adjust margin as needed
+      body: Container(
+        margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),// Background color of each list item
-          color: Theme.of(context).colorScheme.secondary,
+          borderRadius: BorderRadius.circular(8),
         ),
-        child: ListTile(
-          title:Text('Habit: ${task['name']}\nCompleted Date: ${task['date'].toString().split(' ')[0]}',style:const TextStyle(fontSize: 18),),
-          contentPadding: const EdgeInsets.all(12),
+        child: ListView.builder(
+          itemCount: filteredTasks.length,
+          shrinkWrap: true,
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            final task = filteredTasks[index];
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              child: ListTile(
+                title: filteredTasks.isEmpty
+                    ? const Text(
+                        "No Record of finishing this habit",
+                        style: TextStyle(fontSize: 18),
+                      )
+                    : Text(
+                        'Habit: ${task['name']}\nCompleted Date: ${task['date'].toString().split(' ')[0]}',
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                contentPadding: const EdgeInsets.all(12),
+              ),
+            );
+          },
         ),
-      );
-    },
-  ),
-),
-
+      ),
     );
   }
 }
+

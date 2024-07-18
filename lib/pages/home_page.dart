@@ -223,6 +223,7 @@ Future<void> setReminder(context) async {
 
   //build heatmap
    Widget _buildHeatMap(){
+    
     //habit database
     final habitDatabase = context.watch<HabitDatabase>();
 

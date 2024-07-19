@@ -1,6 +1,6 @@
 
 # Project Title
-HabitTracker-central hub for managing and cultivating habits
+Habit Tracker-central hub for managing and cultivating habits
 
 
 

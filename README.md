@@ -15,6 +15,7 @@ Habit Tracker-central hub for managing and cultivating habits
 * Has option to view the log of your habit completed.
 * Has a guide to use the app.
 * Has Notification option to remind you to keep track your goal daily.
+* Available on Amazon App Store
 
 * New Feature Added :Schedule Notification Feature added just to remind you to track your habit record everyday and now can view the the logs of the habit when they are completed.
 
